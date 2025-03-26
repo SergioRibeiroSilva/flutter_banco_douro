@@ -13,7 +13,7 @@ class AccountService {
       _streamController.stream;
 
   String url =
-      "https://api.github.com/gists/ac0b4d8708f0b80e8f99f9e3d1d00f23";
+      "https://api.github.com/gists/ac0b4d8708f0b80e8f99f9e3d1d00f23"; //essa chave é do Gist...
 
   Future<List<Account>> getAll() async {
     Response response = await get(
