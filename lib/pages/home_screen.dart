@@ -81,14 +81,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        showModalBottomSheet(context: context, builder: (context) {
-          return AddAccountModal();
-        },
-        isScrollControlled: true);
-      }, //isScrollControlled ... importantíssimo....
-      child: Icon(Icons.add),
-      backgroundColor: AppColor.orange,),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return AddAccountModal();
+            },
+            isScrollControlled: true,
+          );
+        }, //isScrollControlled ... importantíssimo....
+        child: Icon(Icons.add),
+        backgroundColor: AppColor.orange,
+      ),
     );
   }
 }

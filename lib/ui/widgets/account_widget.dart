@@ -1,4 +1,6 @@
-﻿import 'package:flutter/material.dart';
+﻿import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_banco_douro/models/account.dart';
 import 'package:flutter_banco_douro/ui/styles/colors.dart';
 
@@ -30,7 +32,9 @@ class AccountWidget extends StatelessWidget {
                   fontSize: 18,
                 ),
               ),
-              Text("ID: ${account.id}"),
+              Text(
+                "ID: ${account.id.substring(0, min(account.id.length, 5))}",
+              ),
               Text(
                 "Saldo: ${account.balance.toStringAsFixed(2)}",
               ),
