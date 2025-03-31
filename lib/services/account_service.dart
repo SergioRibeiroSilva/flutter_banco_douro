@@ -20,6 +20,27 @@ class AccountService {
       Uri.parse(url),
       headers: {"Authorization": "Bearer $githubApiKey"},
     );
+
+    print('Status Code: ${response.statusCode}');
+    //print('Response Body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      if (response.body.isNotEmpty) {
+        try {
+          final data = jsonDecode(response.body);
+          print('Dados decodificados: $data');
+        } catch (e) {
+          print('Erro ao decodificar JSON: $e');
+        }
+      } else {
+        print('Erro: Resposta vazia!');
+      }
+    } else {
+      print('Erro na requisição: ${response.statusCode}');
+    }
+
+    print('================================');
+
     _streamController.add(
       "${DateTime.now()} | Requisição de leitura.",
     );
@@ -27,6 +48,12 @@ class AccountService {
     Map<String, dynamic> mapResponse = json.decode(
       response.body,
     );
+
+    bool existe = response.body.contains('"content":""');
+    if (existe) {
+      print("content está vazio");
+    }
+
     List<dynamic> listDynamic = json.decode(
       mapResponse["files"]["accounts.json"]["content"],
     );
@@ -45,6 +72,8 @@ class AccountService {
 
   addAccount(Account account) async {
     List<Account> listAccounts = await getAll();
+    //List<Account> listAccounts = [];
+
     listAccounts.add(account);
     await save(listAccounts, accountName: account.name);
   }
@@ -77,6 +106,7 @@ class AccountService {
       _streamController.add(
         "${DateTime.now()} | Requisição adição bem sucedida ($accountName).",
       );
+      print('Add bem sucedido.');
     } else {
       _streamController.add(
         "${DateTime.now()} | Requisição falhou ($accountName).",

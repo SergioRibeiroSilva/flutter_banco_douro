@@ -48,7 +48,13 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
+                  return Center(
+                    child: Text("ConnectionState.none"),
+                  );
                 case ConnectionState.waiting:
+                  return Center(
+                    child: Text("ConnectionState.waiting"),
+                  );
                 case ConnectionState.active:
                   return Center(
                     child: CircularProgressIndicator(),
@@ -58,7 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (snapshot.data == null ||
                         snapshot.data!.isEmpty) {
                       return Center(
-                        child: Text("Lista vazia"),
+                        child: Text(
+                          "Lista parece estar vazia",
+                        ),
                       );
                     } else {
                       List<Account> listAccounts =
